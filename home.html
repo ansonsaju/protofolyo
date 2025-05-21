@@ -1203,6 +1203,304 @@
                 </div>
             </div>
         </div>
+        <!-- Blog Section -->
+<section id="blog" class="blog">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="fade-in">My Blog</h2>
+            <p class="fade-in">Insights, tutorials, and thoughts on design, development, and digital trends.</p>
+        </div>
+        
+        <div class="blog-filters fade-in">
+            <div class="blog-search">
+                <input type="text" id="blog-search-input" class="form-control" placeholder="Search blog posts...">
+                <button id="blog-search-btn" class="btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="blog-categories">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="design">Design</button>
+                <button class="filter-btn" data-category="development">Development</button>
+                <button class="filter-btn" data-category="business">Business</button>
+                <button class="filter-btn" data-category="tutorials">Tutorials</button>
+            </div>
+        </div>
+        
+        <div class="blog-grid">
+            <!-- Blog posts will be loaded dynamically here -->
+        </div>
+        
+        <div class="blog-load-more">
+            <button id="load-more-btn" class="btn">Load More</button>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Post Modal -->
+<div id="blog-modal" class="blog-modal">
+    <div class="blog-modal-content">
+        <span class="blog-modal-close">&times;</span>
+        <div id="blog-modal-body">
+            <!-- Blog post content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<!-- Add this to your existing CSS section -->
+<style>
+    /* Blog Section Styles */
+    .blog {
+        background-color: #f9fafb;
+    }
+    
+    body.dark-mode .blog {
+        background-color: #111827;
+    }
+    
+    .blog-filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    
+    .blog-search {
+        display: flex;
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    .blog-search input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        flex-grow: 1;
+    }
+    
+    .blog-search button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    .blog-categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+    
+    .blog-card {
+        background-color: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+    }
+    
+    body.dark-mode .blog-card {
+        background-color: #1f2937;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .blog-img {
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .blog-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+    
+    .blog-card:hover .blog-img img {
+        transform: scale(1.05);
+    }
+    
+    .blog-content {
+        padding: 1.5rem;
+    }
+    
+    .blog-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        color: var(--gray);
+    }
+    
+    .blog-category {
+        background-color: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+    
+    body.dark-mode .blog-category {
+        background-color: rgba(37, 99, 235, 0.2);
+    }
+    
+    .blog-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+    }
+    
+    .blog-excerpt {
+        color: var(--gray);
+        margin-bottom: 1.25rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .blog-load-more {
+        text-align: center;
+    }
+    
+    /* Blog Modal */
+    .blog-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+    }
+    
+    .blog-modal-content {
+        background-color: white;
+        margin: 5% auto;
+        padding: 2rem;
+        width: 90%;
+        max-width: 900px;
+        border-radius: 20px;
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    body.dark-mode .blog-modal-content {
+        background-color: #1f2937;
+    }
+    
+    .blog-modal-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        color: var(--gray);
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .blog-modal-close:hover {
+        color: var(--primary);
+    }
+    
+    .blog-post-content {
+        margin-top: 2rem;
+    }
+    
+    .blog-post-header {
+        margin-bottom: 2rem;
+    }
+    
+    .blog-post-meta {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        color: var(--gray);
+    }
+    
+    .blog-post-meta div {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .blog-post-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .blog-post-img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+    
+    /* For tablets */
+    @media (max-width: 768px) {
+        .blog-filters {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .blog-search {
+            max-width: 100%;
+        }
+        
+        .blog-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+        
+        .blog-modal-content {
+            width: 95%;
+            margin: 10% auto;
+            padding: 1.5rem;
+        }
+        
+        .blog-post-title {
+            font-size: 2rem;
+        }
+    }
+    
+    /* For mobile */
+    @media (max-width: 480px) {
+        .blog-categories {
+            justify-content: center;
+        }
+        
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .blog-modal-content {
+            margin: 15% auto;
+            padding: 1rem;
+        }
+        
+        .blog-post-title {
+            font-size: 1.75rem;
+        }
+        
+        .blog-post-meta {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+</style>
     </section>
 
     <!-- Contact Section -->
@@ -1495,5 +1793,7 @@
     <script src="cvdownload.js"></script>
     <script src="service-model.js"></script>
     <script src="contact.js"></script>
+    <script src="blog.js"></script>
+
 </body>
 </html>
