@@ -1029,7 +1029,8 @@
                         <span class="skill">Node.js</span>
                         <span class="skill">WordPress</span>
                     </div>
-                    <a href="#" class="btn fade-in" style="margin-top: 2rem;">Download CV</a>
+                    <a href="#" id="downloadCVBtn" class="btn fade-in" style="margin-top: 2rem;">Download CV</a>
+
                 </div>
             </div>
         </div>
@@ -1222,7 +1223,7 @@
                             </div>
                             <div>
                                 <h4>Location</h4>
-                                <p>San Francisco, CA, USA</p>
+                                <p>GPTC pala ,India</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1252,21 +1253,22 @@
                     </div>
                 </div>
                 <div class="contact-form fade-in">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
+                    <form id="contactForm" method="POST" action="send-email.php">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
+    </div>
+    <button type="submit" class="btn">Send Message</button>
+</form>
+
                 </div>
             </div>
         </div>
@@ -1310,7 +1312,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Your Name. All Rights Reserved.</p>
+                <p>&copy; 2025 protofolio. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -1490,5 +1492,8 @@
             contactForm.reset();
         });
     </script>
+    <script src="cvdownload.js"></script>
+    <script src="service-model.js"></script>
+    <script src="contact.js"></script>
 </body>
 </html>
